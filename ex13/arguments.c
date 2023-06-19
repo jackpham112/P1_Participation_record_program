@@ -36,20 +36,17 @@ int main( int argc, char *argv[] )
   // widest command-line argument (including the null terminator at the end).
   char (*words)[ longest + 1 ];
 
-
+  words = (char (*) [longest + 1]) malloc(argc * sizeof(*words));
 
   // Copy each command-line argumetn to a row of this new array.
-   for(int i = 0; i < argc; i++) {
-    words = argv[i];
-    words++;
+  for (int i = 0; i < argc; ++i) {
+    strcpy(words[i], argv[i]);
   }
   
 
   // Call a function that's expecting the command-line arguments as a 2D array
   // (not as an array of pointers).
-  for (int i = 0; i < argc; i++) {
-    printf("%s\n", argv[i]);
-  }
+  printArguments( argc, longest + 1, words );
 
   return 0;
 }
